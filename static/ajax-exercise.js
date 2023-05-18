@@ -35,14 +35,26 @@ document.querySelector('#get-fortune-button').addEventListener('click', showFort
 //     });
 // });
 
+// for saving a json file:
+// import json
+
+
+
+//    data_file = open("data.json", "w")
+//    json.dump(data, data_file)
+//    data_file.close()
+
+
 function showWeather(evt) {
   evt.preventDefault();
 
-  const url = '/weather.json';
   const zipcode = document.querySelector('#zipcode-field').value;
+  const url = `/weather.json?zipcode=${zipcode}`;
 
   fetch(url)
-  
+    .then((response) => response.json())
+    .then((responsejson) => document.querySelector('#weather-form').innerHTML = responsejson['forecast'])
+
 
   // TODO: request weather with that URL and show the forecast in #weather-info
 }
